@@ -149,7 +149,7 @@ def beta(asset_returns, market_returns):
     m_var = market_returns.var()
     return covariance / m_var
 
-# portfolio expected return
+# portfolio expected returns
 
 
 def portfolio_expected_return(asset_returns, weights):
