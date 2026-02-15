@@ -6,18 +6,18 @@ import numpy as np
 def expected_return(asset_returns):
     """
     Calculated annual expected return
-    
+
     Parameters
     ----------
     asset_returns : pd.Series or pd.DataFrame
         Daily returns for asset(s)
- 
+
     Returns
     -------
     float or pd.Series
         Annualized expected return
     """
-    
+
     annual_returns = asset_returns.mean() * 252
     return annual_returns
 
@@ -27,18 +27,18 @@ def expected_return(asset_returns):
 def volatility(asset_returns):
     """
     Calculates annualized volatility
-    
+
     Parameters
     ----------
     asset_returns : pd.Series or pd.DataFrame
         Daily returns for asset(s)
-    
+
     Returns
     -------
     float or pd.Series
         Annualized volatility
     """
-    
+
     vol = asset_returns.std() * np.sqrt(252)
     return vol
 
@@ -72,7 +72,7 @@ def sharpe_ratio(asset_returns, risk_free_rate=0.04):
 def hist_var(asset_returns, confidence_level=0.95):
     """
     Calculates VaR using historical or empirical data
-    
+
     Parameters
     ----------
 
@@ -80,7 +80,7 @@ def hist_var(asset_returns, confidence_level=0.95):
         Daily returns for asset(s)
     confidence_level : float, default=0.95
         Confidence level for VaR
-    
+
     Returns
     -------
     float or pd.Series
@@ -98,7 +98,7 @@ def cvar(asset_returns, confidence_level=0.95):
     """
     Calculation for Conditional VaR
         The average of all returns that are worse than your VaR threshold
-    
+
     Parameters
     ----------
     asset_returns : pd.Series or pd.DataFrame
