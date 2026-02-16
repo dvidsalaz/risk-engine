@@ -144,6 +144,23 @@ def correlation_matrix(asset_returns):
 
 
 def beta(asset_returns, market_returns):
+    """
+    Measures the sensitivity of an asset relative to market movement
+    
+    Parameters
+    ----------
+
+    asset_returns: pd.Series or pd.DataFrame
+        Daily returns of asset(s)
+    market_returns: pd.Series
+        Daily returns of market benchmark (e.g. SPY)
+
+    Returns
+    -------
+
+    float or pd.Series
+        Beta
+    """
 
     covariance = asset_returns.cov(market_returns)
     m_var = market_returns.var()
@@ -153,6 +170,23 @@ def beta(asset_returns, market_returns):
 
 
 def portfolio_expected_return(asset_returns, weights):
+    """
+    Calculates weighted portfolio expected return
+
+    Parameters
+    ----------
+    
+    asset_returns : pd.Series or pd.DataFrame
+        Daily return of asset(s)
+    weights : np.ndarray
+        Portfolio weights for each asset (must sum to 1.0)
+
+    Returns
+    -------
+
+    float or pd.Series
+        Portfolio expected return
+    """
 
     individual_returns = expected_return(asset_returns)
     portfolio_returns = (individual_returns * weights).sum()
@@ -162,5 +196,23 @@ def portfolio_expected_return(asset_returns, weights):
 
 
 def portfolio_volatility(asset_returns, weights):
+    """
+    Calculates portfolio volatility using covariance matrix
+    
+    Parameters
+    ----------
+
+    asset_returns : pd.Series or pd.DataFrame
+        Daily returns of asset(s)
+    weights : np.ndarray
+        Portfolio weights for each asset (must sum to 1.0)
+
+    Returns
+    -------
+
+    float
+        portfolio volatility
+
+    """
     cov_matrix = asset_returns.cov() * 252
     return np.sqrt(weights.T @ cov_matrix @ weights)
