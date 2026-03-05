@@ -146,7 +146,7 @@ def correlation_matrix(asset_returns):
 def beta(asset_returns, market_returns):
     """
     Measures the sensitivity of an asset relative to market movement
-    
+
     Parameters
     ----------
 
@@ -175,7 +175,7 @@ def portfolio_expected_return(asset_returns, weights):
 
     Parameters
     ----------
-    
+
     asset_returns : pd.Series or pd.DataFrame
         Daily return of asset(s)
     weights : np.ndarray
@@ -198,7 +198,7 @@ def portfolio_expected_return(asset_returns, weights):
 def portfolio_volatility(asset_returns, weights):
     """
     Calculates portfolio volatility using covariance matrix
-    
+
     Parameters
     ----------
 
