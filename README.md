@@ -60,7 +60,7 @@ visualization(returns=returns['TSLA'], var=tsla_var, cvar=tsla_cvar)
 > This project uses historical VaR rather than parametric VaR.
 >  Historical data captures skewness and excess kurtosis that a normal distribution assumption would fail to capture.
 
-In the data provided, Figure 1.1, captures the VaR and Conditional Value at Risk (CVaR/ES) for SPY. In the graph, the red line represents VaR at a 95% confidence level. Daily losses are not expected to exceed **1.93%**. The green dashed line represents CVaR. On days where losses breach the threshold, the average loss is **3.20%**. The shaded band between VaR and CVaR highlights the severity of tail events. The wider the band, the more dangerous the tail.
+In the data provided, Figure 1.1, captures the VaR and Conditional Value at Risk (CVaR/ES) for SPY. In the graph, the red line represents VaR at a 95% confidence level. The daily losses are not expected to exceed **1.93%**. The green dashed line represents CVaR. On days where losses breach the threshold, the average loss is **3.20%**. In the shaded band between VaR and CVaR, it highlights the severity of tail events. The wider the band, the more dangerous the tail.
 
 In the TSLA graph, Figure 1.2, at a 95% confidence level, daily losses are not expected to exceed **6.28%**. When daily losses breach the VaR threshold, the average loss is **9.09%**. Compared to the figure 1.1, TSLA's band is significantly wider. Indicating a fatter tail and a higher susceptibility to extreme loss events. 
 
