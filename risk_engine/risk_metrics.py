@@ -217,3 +217,24 @@ def portfolio_volatility(asset_returns, weights):
     """
     cov_matrix = asset_returns.cov() * 252
     return np.sqrt(weights.T @ cov_matrix @ weights)
+
+
+# portfolio_returns
+
+
+def portfolio_returns(asset_returns, weights):
+    return (asset_returns * weights).sum(axis=1)
+
+
+# Portfolio VaR
+
+
+def portfolio_var(asset_returns, weights):
+    return hist_var(portfolio_returns(asset_returns, weights))
+
+
+# Portfolio cVaR
+
+
+def portfolio_cvar(asset_returns, weights):
+    return cvar(portfolio_returns(asset_returns, weights))

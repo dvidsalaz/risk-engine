@@ -33,6 +33,3 @@ def get_market_data(tickers, start_date, end_date):
     returns = prices.pct_change().dropna()
 
     return (prices, returns)
-
-
-prices, returns = get_market_data(['SPY', 'TLT', 'GLD'], '2020-12-31', '2025-01-01')
