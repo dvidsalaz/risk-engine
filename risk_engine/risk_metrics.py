@@ -124,7 +124,7 @@ def cvar(asset_returns, confidence_level=0.95):
 def correlation_matrix(asset_returns):
     """
     Correlation Matrix
-        How assets move together
+        How assets move together using Pearson's correlation
 
     Parameters
     ----------
