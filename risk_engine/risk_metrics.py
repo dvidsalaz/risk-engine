@@ -238,3 +238,31 @@ def portfolio_var(asset_returns, weights):
 
 def portfolio_cvar(asset_returns, weights):
     return cvar(portfolio_returns(asset_returns, weights))
+
+
+def stress_test(returns, start_date, end_date, confidence_level=0.95):
+    """
+    Calculate stress test given crisis period
+
+    Parameters:
+    -----------
+
+    asset_returns : pd.Series or pd.DataFrame
+        Daily return of asset(s)
+
+    start_date : str
+        Start date in 'YYYY-MM-DD' format
+
+    end_date : str
+        End date in 'YYYY-MM-DD' format
+
+    confidence_level : float, default=0.95
+
+    Returns:
+    --------
+    Tuple of VaR and CVaR
+    """
+
+    crisis_period = returns.loc[start_date:end_date]  # splice data
+
+    return hist_var(crisis_period, confidence_level), cvar(crisis_period, confidence_level)
