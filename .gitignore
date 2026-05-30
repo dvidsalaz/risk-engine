@@ -28,5 +28,5 @@ Thumbs.db
 *.parquet
 
 #ignore scratch folder
-/scratch
+scratch/
 
