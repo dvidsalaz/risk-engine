@@ -12,6 +12,8 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
+
+
 # OS junk
 .DS_Store
 Thumbs.db
@@ -24,3 +26,7 @@ Thumbs.db
 *.log
 *.csv
 *.parquet
+
+#ignore scratch folder
+/scratch
+
