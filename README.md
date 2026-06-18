@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 from risk_engine.data_loader import get_market_data
 from risk_engine.risk_metrics import hist_var, cvar
-from risk_engine.visualization import visualization
+from risk_engine.visualization import plot_var_cvar
 
 tickers = ['SPY', 'TLT', 'GLD', 'TSLA']
 prices, returns = get_market_data(tickers, '2020-01-01', '2025-01-01')
@@ -46,8 +46,8 @@ spy_cvar = cvar(returns['SPY'])
 tsla_var = hist_var(returns['TSLA'])
 tsla_cvar = cvar(returns['TSLA'])
 
-visualization(returns=returns['SPY'], var=var, cvar=spy_cvar)
-visualization(returns=returns['TSLA'], var=tsla_var, cvar=tsla_cvar)
+plot_var_cvar(returns=returns['SPY'], var=var, cvar=spy_cvar)
+plot_var_cvar(returns=returns['TSLA'], var=tsla_var, cvar=tsla_cvar)s
 
 
 ```

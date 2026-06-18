@@ -13,4 +13,3 @@ def plot_var_cvar(returns, var, cvar, confidence_level=0.95):
     plt.xlim(-0.12, 0.10)
     plt.legend()
     plt.show()
-
