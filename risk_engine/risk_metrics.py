@@ -87,7 +87,7 @@ def hist_var(asset_returns, confidence_level=0.95):
         Historical VaR
 
     """
-
+    assert 0 <= confidence_level <= 1, "confidence level is not between 0 and 1"
     var = asset_returns.quantile(1-confidence_level)
     return var
 
@@ -112,7 +112,7 @@ def cvar(asset_returns, confidence_level=0.95):
         Conditional VaR
 
     """
-
+    assert 0 <= confidence_level <= 1, "confidence level is not between 0 and 1"
     var_threshold = hist_var(asset_returns, confidence_level)
     bad_returns = asset_returns[asset_returns < var_threshold]
     return bad_returns.mean()
@@ -188,7 +188,8 @@ def portfolio_expected_return(asset_returns, weights):
     float or pd.Series
         Portfolio expected return
     """
-
+    assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
+    assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
     individual_returns = expected_return(asset_returns)
     portfolio_returns = (individual_returns * weights).sum()
     return portfolio_returns
@@ -215,6 +216,8 @@ def portfolio_volatility(asset_returns, weights):
         portfolio volatility
 
     """
+    assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
+    assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
     cov_matrix = asset_returns.cov() * 252
     return np.sqrt(weights.T @ cov_matrix @ weights)
 
@@ -223,6 +226,8 @@ def portfolio_volatility(asset_returns, weights):
 
 
 def portfolio_returns(asset_returns, weights):
+    assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
+    assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
     return (asset_returns * weights).sum(axis=1)
 
 
