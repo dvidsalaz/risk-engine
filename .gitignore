@@ -8,6 +8,7 @@ __pycache__/
 .venv/
 venv/
 env/
+.env*
 
 # Jupyter
 .ipynb_checkpoints/
@@ -30,3 +31,5 @@ Thumbs.db
 #ignore scratch folder
 scratch/
 
+#json
+lseg-data.config.json
