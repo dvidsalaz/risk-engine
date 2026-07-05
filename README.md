@@ -23,8 +23,12 @@ Portfolio Volatility: Calculates how much the overall portfolio fluctuates
 ```bash
 git clone https://github.com/dvidsalaz/risk-engine.git
 cd risk-engine
-pip install -r requirements.txt
+pip install -e .
 ```
+
+This installs the package in editable mode using `pyproject.toml`, which also pulls in the required dependencies (`pandas`, `numpy`, `matplotlib`, `lseg-data`).
+
+> **Note:** Live data pulls require an active LSEG session (`ld.open_session()`), which requires institutional credentials (e.g. Eikon, Workspace, or CodeBook access). If you don't have LSEG access, use the cached sample data included in this repo — see Usage below.
 
 ## Usage
 
@@ -35,8 +39,8 @@ from risk_engine.data_loader import get_market_data
 from risk_engine.risk_metrics import hist_var, cvar
 from risk_engine.visualization import plot_var_cvar
 
-tickers = ['SPY', 'TLT', 'GLD', 'TSLA']
-prices, returns = get_market_data(tickers, '2020-01-01', '2025-01-01')
+tickers = ['SPY', 'TLT.O', 'GLD', 'TSLA.O']
+returns = get_market_data(tickers, '2020-01-01', '2025-01-01', use_cache=True)
 
 print(hist_var(returns))  # 95% VaR
 print(cvar(returns))  # Expected Shortfall
@@ -46,14 +50,17 @@ print(cvar(returns))  # Expected Shortfall
 var = hist_var(returns['SPY'])
 spy_cvar = cvar(returns['SPY'])
 
-tsla_var = hist_var(returns['TSLA'])
-tsla_cvar = cvar(returns['TSLA'])
+tsla_var = hist_var(returns['TSLA.O'])
+tsla_cvar = cvar(returns['TSLA.O'])
 
 plot_var_cvar(returns=returns['SPY'], var=var, cvar=spy_cvar)
-plot_var_cvar(returns=returns['TSLA'], var=tsla_var, cvar=tsla_cvar)s
+plot_var_cvar(returns=returns['TSLA.O'], var=tsla_var, cvar=tsla_cvar)
 
 
 ```
+
+> **Note:** Tickers use LSEG RIC (Reuters Instrument Code) conventions. Suffixes like `.O` denote the listing exchange (e.g. NASDAQ) where applicable — this is why `TLT.O` and `TSLA.O` have suffixes while `SPY` and `GLD` don't.
+
 
 ## Sample Output
 
