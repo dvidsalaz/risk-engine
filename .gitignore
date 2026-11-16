@@ -25,7 +25,6 @@ Thumbs.db
 
 # Logs / data
 *.log
-*.csv
 *.parquet
 
 #ignore scratch folder
@@ -33,3 +32,6 @@ scratch/
 
 #json
 lseg-data.config.json
+
+*.egg-info/
+

@@ -1,8 +1,12 @@
+import pandas as pd
 import lseg.data as ld
 
 
-def get_market_data(tickers, start_date, end_date):
+def get_market_data(tickers, start_date, end_date, use_cache=False, cache_path='data/sample_returns.csv'):
     """
+    
+    **Before running any data, open an LSEG session**
+    
     Docstring for get_market_data
 
     Computes Daily Returns by pulling TR.TotalReturn directly from LSEG (already dividend-adjusted, already a return) and converts units to decimal form.
@@ -24,6 +28,9 @@ def get_market_data(tickers, start_date, end_date):
         Daily returns (decimal form) for each ticker
 
     """
+    if use_cache:
+        return pd.read_csv(cache_path, index_col=0, parse_dates=True)
+
     df = ld.get_data(
         universe=tickers,
         fields=['TR.TotalReturn.date', 'TR.TotalReturn'],
