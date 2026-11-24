@@ -87,9 +87,10 @@ def hist_var(asset_returns, confidence_level=0.95):
         Historical VaR
 
     """
-    assert 0 <= confidence_level <= 1, "confidence level is not between 0 and 1"
+    if not 0 < confidence_level < 1:
+        raise ValueError("Confidence level must be between 0 and 1.")
     var = asset_returns.quantile(1-confidence_level)
-    return var
+    return -var
 
 # Conditional Value at Risk (CVaR)
 
@@ -112,10 +113,11 @@ def cvar(asset_returns, confidence_level=0.95):
         Conditional VaR
 
     """
-    assert 0 <= confidence_level <= 1, "confidence level is not between 0 and 1"
-    var_threshold = hist_var(asset_returns, confidence_level)
+    if not 0 < confidence_level < 1:
+        raise ValueError("Confidence level must be between 0 and 1.")
+    var_threshold = -hist_var(asset_returns, confidence_level)
     bad_returns = asset_returns[asset_returns < var_threshold]
-    return bad_returns.mean()
+    return -bad_returns.mean()
 
 
 # Correlation Matrix
@@ -124,7 +126,7 @@ def cvar(asset_returns, confidence_level=0.95):
 def correlation_matrix(asset_returns):
     """
     Correlation Matrix
-        How assets move together using Pearson's correlation
+        How assets move together using Pearson's correlation.
 
     Parameters
     ----------
@@ -190,6 +192,7 @@ def portfolio_expected_return(asset_returns, weights):
     """
     assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
     assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
+
     individual_returns = expected_return(asset_returns)
     portfolio_returns = (individual_returns * weights).sum()
     return portfolio_returns
@@ -216,8 +219,6 @@ def portfolio_volatility(asset_returns, weights):
         portfolio volatility
 
     """
-    assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
-    assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
     cov_matrix = asset_returns.cov() * 252
     return np.sqrt(weights.T @ cov_matrix @ weights)
 
@@ -226,10 +227,27 @@ def portfolio_volatility(asset_returns, weights):
 
 
 def portfolio_returns(asset_returns, weights):
+    """
+    Calculated portoflio returns
+
+    Parameters
+    ----------
+
+    asset_returns: pd.Series or pd.DataFrame
+        Daily return of asset(s)
+
+    weights: np.ndarray
+        Portfolio weights for each asset (must sum to 1.0)
+    
+    Returns
+    -------
+
+    float
+        
+    """
     assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
     assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
-
-    return (asset_returns * weights).sum(axis=1)
+    return (asset_returns * weights).sum(axis=1, min_count=len(weights))
 
 
 # Portfolio VaR
@@ -246,13 +264,14 @@ def portfolio_cvar(asset_returns, weights):
     return cvar(portfolio_returns(asset_returns, weights))
 
 
+
 def stress_test(asset_returns, start_date, end_date, confidence_level=0.95):
     """
     Calculate stress test given crisis period
-
+    
     Parameters:
     -----------
-
+    
     asset_returns : pd.Series or pd.DataFrame
         Daily return of asset(s)
 
@@ -268,7 +287,6 @@ def stress_test(asset_returns, start_date, end_date, confidence_level=0.95):
     --------
     Tuple of VaR and CVaR
     """
-
-    crisis_period = asset_returns.loc[start_date:end_date]  # splice data
-
-    return hist_var(crisis_period, confidence_level), cvar(crisis_period, confidence_level)
+    crisis_period = asset_returns.loc[start_date:end_date] #splice data
+    
+    return hist_var(crisis_period, confidence_level), cvar(crisis_period, confidence_level) 

@@ -61,11 +61,10 @@ plot_var_cvar(returns=returns['TSLA.O'], var=tsla_var, cvar=tsla_cvar)
 
 > **Note:** Tickers use LSEG RIC (Reuters Instrument Code) conventions. Suffixes like `.O` denote the listing exchange (e.g. NASDAQ) where applicable — this is why `TLT.O` and `TSLA.O` have suffixes while `SPY` and `GLD` don't.
 
-
 ## Sample Output
 
-<img width="500" height="343" alt="image" src="https://github.com/user-attachments/assets/16872cdd-7c76-4dc5-9af8-cca649aeee66" />
-<img width="500" height="343" alt="image" src="https://github.com/user-attachments/assets/d55cb189-8497-414d-ba26-ad8b6278da21" />
+<img width="500" height="343" alt="Historical VaR and CVaR (ES) for SPY" src="docs/figures/output_img.png" />
+<img width="500" height="343" alt="Historical VaR and CVaR (ES) for TSLA" src="docs/figures/tsla_plot.png" />
 
 > [!NOTE]
 > This project uses historical VaR rather than parametric VaR.

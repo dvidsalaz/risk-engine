@@ -10,8 +10,10 @@ dependencies = [
     "pandas",
     "numpy",
     "matplotlib",
-    "lseg-data",
 ]
+
+[project.optional-dependencies]
+lseg = ["lseg-data"]
 
 [tool.setuptools]
 packages = ["risk_engine"]

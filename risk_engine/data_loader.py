@@ -1,5 +1,4 @@
 import pandas as pd
-import lseg.data as ld
 
 
 def get_market_data(tickers, start_date, end_date, use_cache=False, cache_path='data/sample_returns.csv'):
@@ -31,6 +30,8 @@ def get_market_data(tickers, start_date, end_date, use_cache=False, cache_path='
     if use_cache:
         return pd.read_csv(cache_path, index_col=0, parse_dates=True)
 
+    import lseg.data as ld
+    
     df = ld.get_data(
         universe=tickers,
         fields=['TR.TotalReturn.date', 'TR.TotalReturn'],
