@@ -70,7 +70,7 @@ plot_var_cvar(returns=returns['TSLA.O'], var=tsla_var, cvar=tsla_cvar)
 > This project uses historical VaR rather than parametric VaR.
 > Historical data captures skewness and excess kurtosis that a normal distribution assumption would fail to capture.
 
-In the sample output, the daily returns cover **1,258 trading days** from January 2, 2020, through December 31, 2024. The 95% one-day historical VaR was **1.92% for SPY** and **6.28% for TSLA**. Each asset had 63 days when losses exceeded its VaR threshold. Across those days, the average loss (Expected Shortfall) was **3.19% for SPY** and **9.09% for TSLA**.
+In the sample output, the daily returns cover **1,258 trading days** from January 2, 2020, through December 31, 2024. The 95% one-day historical VaR was **1.92% for SPY** and **6.28% for TSLA**. Each asset had 63 days when losses exceeded its VaR threshold. Across those days, CVaR (Expected Shortfall) was **3.19% for SPY** and **9.09% for TSLA**.
 
 > [!WARNING]
 > This project uses static correlation. During a crisis, correlation spikes toward 1. Assets that normally move independently begin moving together. Static correlation averages historical data. This contains calm periods, bull markets, and low volatility stretches into a single value. As a result, tail losses during stress periods are understated. A more accurate approach would implement dynamic conditional correlation (DCC) or rolling correlation — time-varying models that capture how correlation shifts during crisis periods rather than averaging it away.
