@@ -219,6 +219,9 @@ def portfolio_volatility(asset_returns, weights):
         portfolio volatility
 
     """
+    assert len(weights) == asset_returns.shape[1], "length of weights does not equal # of columns"
+    assert np.isclose(weights.sum(), 1), " weights don't sum to 1.0."
+    
     cov_matrix = asset_returns.cov() * 252
     return np.sqrt(weights.T @ cov_matrix @ weights)
 
